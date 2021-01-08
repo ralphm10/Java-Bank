@@ -16,4 +16,12 @@ public class AccountTest {
         account.deposit(1000);
         assertEquals(1000, account.getBalance());
     }
+
+    @Test
+    public void withdrawalDecreasesBalance() {
+        Account account = new Account();
+        account.deposit(1000);
+        account.withdraw(500);
+        assertEquals(500, account.getBalance());
+    }
 }
