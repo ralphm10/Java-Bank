@@ -1,8 +1,11 @@
 public class Account {
+
+    private static int openingBalance = 0;
+
     private int balance;
 
     public Account(){
-        this.balance = 0;
+        this.balance = openingBalance;
     }
 
     public int getBalance() {
