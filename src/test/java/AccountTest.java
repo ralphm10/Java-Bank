@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class AccountTest {
@@ -14,14 +15,13 @@ public class AccountTest {
 
     @Test
     public void initialBalanceIsZero() {
-
         assertEquals(0, underTest.getBalance());
     }
 
     @Test
     public void depositIncreasesBalance() {
         underTest.deposit(1000);
-        assertEquals(1000, underTest.getBalance());
+        assertThat(underTest.getBalance()).isEqualTo(1000);
     }
 
     @Test
