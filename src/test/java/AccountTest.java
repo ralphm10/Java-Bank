@@ -1,27 +1,33 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class AccountTest {
 
+    private Account underTest;
+
+    @Before
+    public void setUp() {
+        underTest = new Account();
+    }
+
     @Test
     public void initialBalanceIsZero() {
-        Account account = new Account();
-        assertEquals(0, account.getBalance());
+
+        assertEquals(0, underTest.getBalance());
     }
 
     @Test
     public void depositIncreasesBalance() {
-        Account account = new Account();
-        account.deposit(1000);
-        assertEquals(1000, account.getBalance());
+        underTest.deposit(1000);
+        assertEquals(1000, underTest.getBalance());
     }
 
     @Test
     public void withdrawalDecreasesBalance() {
-        Account account = new Account();
-        account.deposit(1000);
-        account.withdraw(500);
-        assertEquals(500, account.getBalance());
+        underTest.deposit(1000);
+        underTest.withdraw(500);
+        assertEquals(500, underTest.getBalance());
     }
 }
