@@ -3,6 +3,9 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class AccountTest {
 
@@ -22,6 +25,15 @@ public class AccountTest {
     public void depositIncreasesBalance() {
         underTest.deposit(1000);
         assertThat(underTest.getBalance()).isEqualTo(1000);
+    }
+
+    @Test
+    public void throwExceptionForANegativeDeposit() {
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        underTest.deposit(-1000));
+        assertTrue(thrown.getMessage().equals("Invalid amount"));
     }
 
     @Test

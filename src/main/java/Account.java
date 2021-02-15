@@ -12,7 +12,10 @@ public class Account {
         return this.balance;
     }
 
-    public void deposit(int amount) {
+    public void deposit(int amount) throws IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Invalid amount");
+        }
         this.balance += amount;
         statement.recordDeposit(amount,getBalance());
     }
