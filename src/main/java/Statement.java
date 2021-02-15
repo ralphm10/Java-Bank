@@ -15,7 +15,7 @@ public class Statement {
         if (getTransactions().size() == 0) {
             return HEADER;
         }
-        return HEADER + "\n" + getTransactions().get(0);
+        return HEADER + "\n" + String.join("\n",getTransactions());
     }
 
     public void recordDeposit(int amount, int balance) {

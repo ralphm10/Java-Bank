@@ -34,6 +34,16 @@ public class StatementTest {
     }
 
     @Test
+    public void recordsMultipleDeposits() {
+        accountUnderTest.deposit(1000);
+        accountUnderTest.deposit(500);
+        assertEquals("date || credit || debit || balance\n" +
+                        "15/02/2021 || 1000 || || 1000\n" +
+                        "15/02/2021 || 500 || || 1500",
+                accountUnderTest.statement.printStatement());
+    }
+
+    @Test
     public void recordsAWithdrawalAndTheDate() {
         accountUnderTest.withdraw(500);
         assertEquals("date || credit || debit || balance\n" +
