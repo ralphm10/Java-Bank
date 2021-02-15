@@ -32,4 +32,12 @@ public class StatementTest {
                 "15/02/2021 || 1000 || || 1000",
                 accountUnderTest.statement.printStatement());
     }
+
+    @Test
+    public void recordsAWithdrawalAndTheDate() {
+        accountUnderTest.withdraw(500);
+        assertEquals("date || credit || debit || balance\n" +
+                        "15/02/2021 || || 500 || -500",
+                accountUnderTest.statement.printStatement());
+    }
 }

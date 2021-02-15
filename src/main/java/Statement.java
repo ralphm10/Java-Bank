@@ -22,6 +22,10 @@ public class Statement {
         transactions.add(printDate() + " || " + amount + " || || " + balance);
     }
 
+    public void recordWithdrawal(int amount, int balance) {
+        transactions.add(printDate() + " || || " + amount + " || " + balance);
+    }
+
     public ArrayList<String> getTransactions() {
         return transactions;
     }
