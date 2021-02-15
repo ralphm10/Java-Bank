@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class Statement {
 
-    private String HEADER = "date || credit || debit || balance";
+    private final String HEADER = "date || credit || debit || balance";
     public ArrayList<String> transactions = new ArrayList<>();
 
     public String printStatement(){
