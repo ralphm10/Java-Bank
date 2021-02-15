@@ -37,6 +37,15 @@ public class AccountTest {
     }
 
     @Test
+    public void throwExceptionForANegativeWithdrawal() {
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        underTest.withdraw(-1000));
+        assertTrue(thrown.getMessage().equals("Invalid amount"));
+    }
+
+    @Test
     public void withdrawalDecreasesBalance() {
         underTest.deposit(1000);
         underTest.withdraw(500);

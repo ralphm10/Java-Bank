@@ -20,7 +20,10 @@ public class Account {
         statement.recordDeposit(amount,getBalance());
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(int amount) throws IllegalArgumentException {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Invalid amount");
+        }
         this.balance -= amount;
         statement.recordWithdrawal(amount,getBalance());
     }
