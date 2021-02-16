@@ -1,17 +1,26 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import static org.junit.Assert.assertEquals;
 
 public class StatementTest {
 
     private Statement statementUnderTest;
-    private CurrentAccount currentAccountUnderTest;
+    private CurrentAccount fakeAccount;
+    private Clock clock;
+    private LocalDateTime fakeDate;
 
     @Before
     public void setUp() {
         statementUnderTest = new Statement();
-        currentAccountUnderTest = new CurrentAccount();
+        fakeAccount = new CurrentAccount();
+        clock = Clock.fixed(Instant.parse("2014-12-22T10:15:30.00Z"), ZoneId.of("UTC"));
+        fakeDate = LocalDateTime.now(clock);
     }
 
     @Test
@@ -21,7 +30,7 @@ public class StatementTest {
 
     @Test
     public void printsTheDate(){
-        assertEquals("16/02/2021", statementUnderTest.printDate());
+        assertEquals("22/12/2014", statementUnderTest.printDate(fakeDate));
     }
 
     @Test
@@ -32,37 +41,37 @@ public class StatementTest {
 
     @Test
     public void recordsADepositAndTheDate() {
-        currentAccountUnderTest.deposit(1000);
+        fakeAccount.deposit(1000);
         assertEquals("date || credit || debit || balance\n" +
                 "16/02/2021 || 1000.00 || || 1000.00",
-                currentAccountUnderTest.statement.printStatement());
+                fakeAccount.statement.printStatement());
     }
 
     @Test
     public void recordsMultipleDeposits() {
-        currentAccountUnderTest.deposit(1000);
-        currentAccountUnderTest.deposit(500);
+        fakeAccount.deposit(1000);
+        fakeAccount.deposit(500);
         assertEquals("date || credit || debit || balance\n" +
                         "16/02/2021 || 1000.00 || || 1000.00\n" +
                         "16/02/2021 || 500.00 || || 1500.00",
-                currentAccountUnderTest.statement.printStatement());
+                fakeAccount.statement.printStatement());
     }
 
     @Test
     public void recordsAWithdrawalAndTheDate() {
-        currentAccountUnderTest.withdraw(500);
+        fakeAccount.withdraw(500);
         assertEquals("date || credit || debit || balance\n" +
                         "16/02/2021 || || 500.00 || -500.00",
-                currentAccountUnderTest.statement.printStatement());
+                fakeAccount.statement.printStatement());
     }
 
     @Test
     public void recordsADepositAndWithdrawal() {
-        currentAccountUnderTest.deposit(1000.50);
-        currentAccountUnderTest.withdraw(200.51);
+        fakeAccount.deposit(1000.50);
+        fakeAccount.withdraw(200.51);
         assertEquals("date || credit || debit || balance\n" +
                         "16/02/2021 || 1000.50 || || 1000.50\n" +
                         "16/02/2021 || || 200.51 || 799.99",
-                currentAccountUnderTest.statement.printStatement());
+                fakeAccount.statement.printStatement());
     }
 }

@@ -1,4 +1,4 @@
-public class CurrentAccount {
+public class CurrentAccount implements Account {
 
     private double balance;
     Statement statement = new Statement();
@@ -8,10 +8,12 @@ public class CurrentAccount {
         this.balance = openingBalance;
     }
 
+    @Override
     public double getBalance() {
         return this.balance;
     }
 
+    @Override
     public void deposit(double amount) throws IllegalArgumentException {
         if (amount <= 0) {
             throw new IllegalArgumentException("Invalid amount");
@@ -20,6 +22,7 @@ public class CurrentAccount {
         statement.recordDeposit(amount,getBalance());
     }
 
+    @Override
     public void withdraw(double amount) throws IllegalArgumentException {
         if (amount <= 0) {
             throw new IllegalArgumentException("Invalid amount");
