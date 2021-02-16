@@ -15,7 +15,7 @@ public class CurrentAccount implements Account {
 
     @Override
     public void deposit(double amount) throws IllegalArgumentException {
-        if (amount <= 0) {
+        if (invalidAmount(amount)) {
             throw new IllegalArgumentException("Invalid amount");
         }
         this.balance += amount;
@@ -24,10 +24,14 @@ public class CurrentAccount implements Account {
 
     @Override
     public void withdraw(double amount) throws IllegalArgumentException {
-        if (amount <= 0) {
+        if (invalidAmount(amount)) {
             throw new IllegalArgumentException("Invalid amount");
         }
         this.balance -= amount;
         statement.recordWithdrawal(amount,getBalance());
+    }
+
+    public boolean invalidAmount(double amount) {
+        return amount <= 0 || amount * 1000 % 10 != 0;
     }
 }

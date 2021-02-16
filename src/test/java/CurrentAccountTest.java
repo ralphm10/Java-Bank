@@ -2,8 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -52,9 +51,28 @@ public class CurrentAccountTest {
     }
 
     @Test
+    public void throwExceptionForAmountMoreThanTwoDecimals() {
+        IllegalArgumentException thrown = assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        underTest.deposit(10.999));
+        assertTrue(thrown.getMessage().equals("Invalid amount"));
+    }
+
+    @Test
     public void withdrawalDecreasesBalance() {
         underTest.deposit(1000);
         underTest.withdraw(500);
         assertEquals(500, underTest.getBalance(),0);
+    }
+
+    @Test
+    public void returnsTrueForNegativeAmount() {
+        assertTrue(underTest.invalidAmount(-10));
+    }
+
+    @Test
+    public void returnsTrueForAmountMoreThanTwoDecimals() {
+        assertTrue(underTest.invalidAmount(10.501));
     }
 }
