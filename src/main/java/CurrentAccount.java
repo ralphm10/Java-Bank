@@ -1,9 +1,9 @@
-public class Account {
+public class CurrentAccount {
 
     private double balance;
     Statement statement = new Statement();
 
-    public Account(){
+    public CurrentAccount(){
         double openingBalance = 0;
         this.balance = openingBalance;
     }

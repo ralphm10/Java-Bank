@@ -7,13 +7,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class AccountTest {
+public class CurrentAccountTest {
 
-    private Account underTest;
+    private CurrentAccount underTest;
 
     @Before
     public void setUp() {
-        underTest = new Account();
+        underTest = new CurrentAccount();
     }
 
     @Test

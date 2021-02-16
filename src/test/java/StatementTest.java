@@ -6,12 +6,12 @@ import static org.junit.Assert.assertEquals;
 public class StatementTest {
 
     private Statement statementUnderTest;
-    private Account accountUnderTest;
+    private CurrentAccount currentAccountUnderTest;
 
     @Before
     public void setUp() {
         statementUnderTest = new Statement();
-        accountUnderTest = new Account();
+        currentAccountUnderTest = new CurrentAccount();
     }
 
     @Test
@@ -32,37 +32,37 @@ public class StatementTest {
 
     @Test
     public void recordsADepositAndTheDate() {
-        accountUnderTest.deposit(1000);
+        currentAccountUnderTest.deposit(1000);
         assertEquals("date || credit || debit || balance\n" +
                 "16/02/2021 || 1000.00 || || 1000.00",
-                accountUnderTest.statement.printStatement());
+                currentAccountUnderTest.statement.printStatement());
     }
 
     @Test
     public void recordsMultipleDeposits() {
-        accountUnderTest.deposit(1000);
-        accountUnderTest.deposit(500);
+        currentAccountUnderTest.deposit(1000);
+        currentAccountUnderTest.deposit(500);
         assertEquals("date || credit || debit || balance\n" +
                         "16/02/2021 || 1000.00 || || 1000.00\n" +
                         "16/02/2021 || 500.00 || || 1500.00",
-                accountUnderTest.statement.printStatement());
+                currentAccountUnderTest.statement.printStatement());
     }
 
     @Test
     public void recordsAWithdrawalAndTheDate() {
-        accountUnderTest.withdraw(500);
+        currentAccountUnderTest.withdraw(500);
         assertEquals("date || credit || debit || balance\n" +
                         "16/02/2021 || || 500.00 || -500.00",
-                accountUnderTest.statement.printStatement());
+                currentAccountUnderTest.statement.printStatement());
     }
 
     @Test
     public void recordsADepositAndWithdrawal() {
-        accountUnderTest.deposit(1000.50);
-        accountUnderTest.withdraw(200.51);
+        currentAccountUnderTest.deposit(1000.50);
+        currentAccountUnderTest.withdraw(200.51);
         assertEquals("date || credit || debit || balance\n" +
                         "16/02/2021 || 1000.50 || || 1000.50\n" +
                         "16/02/2021 || || 200.51 || 799.99",
-                accountUnderTest.statement.printStatement());
+                currentAccountUnderTest.statement.printStatement());
     }
 }
