@@ -21,7 +21,12 @@ public class StatementTest {
 
     @Test
     public void printsTheDate(){
-        assertEquals("15/02/2021", statementUnderTest.printDate());
+        assertEquals("16/02/2021", statementUnderTest.printDate());
+    }
+
+    @Test
+    public void formatsTheAmount() {
+        assertEquals(statementUnderTest.formatAmount(10.5),"10.50");
     }
 
 
@@ -29,7 +34,7 @@ public class StatementTest {
     public void recordsADepositAndTheDate() {
         accountUnderTest.deposit(1000);
         assertEquals("date || credit || debit || balance\n" +
-                "15/02/2021 || 1000 || || 1000",
+                "16/02/2021 || 1000.00 || || 1000.00",
                 accountUnderTest.statement.printStatement());
     }
 
@@ -38,8 +43,8 @@ public class StatementTest {
         accountUnderTest.deposit(1000);
         accountUnderTest.deposit(500);
         assertEquals("date || credit || debit || balance\n" +
-                        "15/02/2021 || 1000 || || 1000\n" +
-                        "15/02/2021 || 500 || || 1500",
+                        "16/02/2021 || 1000.00 || || 1000.00\n" +
+                        "16/02/2021 || 500.00 || || 1500.00",
                 accountUnderTest.statement.printStatement());
     }
 
@@ -47,17 +52,17 @@ public class StatementTest {
     public void recordsAWithdrawalAndTheDate() {
         accountUnderTest.withdraw(500);
         assertEquals("date || credit || debit || balance\n" +
-                        "15/02/2021 || || 500 || -500",
+                        "16/02/2021 || || 500.00 || -500.00",
                 accountUnderTest.statement.printStatement());
     }
 
     @Test
     public void recordsADepositAndWithdrawal() {
-        accountUnderTest.deposit(1000);
-        accountUnderTest.withdraw(200);
+        accountUnderTest.deposit(1000.50);
+        accountUnderTest.withdraw(200.51);
         assertEquals("date || credit || debit || balance\n" +
-                        "15/02/2021 || 1000 || || 1000\n" +
-                        "15/02/2021 || || 200 || 800",
+                        "16/02/2021 || 1000.50 || || 1000.50\n" +
+                        "16/02/2021 || || 200.51 || 799.99",
                 accountUnderTest.statement.printStatement());
     }
 }

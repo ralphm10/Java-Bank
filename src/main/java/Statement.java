@@ -3,6 +3,7 @@ import net.time4j.SystemClock;
 import net.time4j.format.expert.ChronoFormatter;
 import net.time4j.format.expert.PatternType;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -18,12 +19,12 @@ public class Statement {
         return HEADER + "\n" + String.join("\n",getTransactions());
     }
 
-    public void recordDeposit(int amount, int balance) {
-        transactions.add(printDate() + " || " + amount + " || || " + balance);
+    public void recordDeposit(double amount, double balance) {
+        transactions.add(printDate() + " || " + formatAmount(amount) + " || || " + formatAmount(balance));
     }
 
-    public void recordWithdrawal(int amount, int balance) {
-        transactions.add(printDate() + " || || " + amount + " || " + balance);
+    public void recordWithdrawal(double amount, double balance) {
+        transactions.add(printDate() + " || || " + formatAmount(amount) + " || " + formatAmount(balance));
     }
 
     public ArrayList<String> getTransactions() {
@@ -42,5 +43,9 @@ public class Statement {
                         )
                 );
         return date;
+    }
+
+    public String formatAmount(double amount) {
+        return new DecimalFormat("#.00").format(amount);
     }
 }

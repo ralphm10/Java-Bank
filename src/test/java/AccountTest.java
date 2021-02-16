@@ -18,13 +18,19 @@ public class AccountTest {
 
     @Test
     public void initialBalanceIsZero() {
-        assertEquals(0, underTest.getBalance());
+        assertEquals(0, underTest.getBalance(),0);
     }
 
     @Test
     public void depositIncreasesBalance() {
         underTest.deposit(1000);
         assertThat(underTest.getBalance()).isEqualTo(1000);
+    }
+
+    @Test
+    public void decimalDepositIsHandles() {
+        underTest.deposit(10.50);
+        assertThat(underTest.getBalance()).isEqualTo(10.50);
     }
 
     @Test
@@ -49,6 +55,6 @@ public class AccountTest {
     public void withdrawalDecreasesBalance() {
         underTest.deposit(1000);
         underTest.withdraw(500);
-        assertEquals(500, underTest.getBalance());
+        assertEquals(500, underTest.getBalance(),0);
     }
 }

@@ -1,6 +1,6 @@
 public class Account {
 
-    private int balance;
+    private double balance;
     Statement statement = new Statement();
 
     public Account(){
@@ -8,11 +8,11 @@ public class Account {
         this.balance = openingBalance;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return this.balance;
     }
 
-    public void deposit(int amount) throws IllegalArgumentException {
+    public void deposit(double amount) throws IllegalArgumentException {
         if (amount <= 0) {
             throw new IllegalArgumentException("Invalid amount");
         }
@@ -20,7 +20,7 @@ public class Account {
         statement.recordDeposit(amount,getBalance());
     }
 
-    public void withdraw(int amount) throws IllegalArgumentException {
+    public void withdraw(double amount) throws IllegalArgumentException {
         if (amount <= 0) {
             throw new IllegalArgumentException("Invalid amount");
         }
