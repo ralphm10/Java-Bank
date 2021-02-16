@@ -4,7 +4,7 @@ public class Account {
     Statement statement = new Statement();
 
     public Account(){
-        int openingBalance = 0;
+        double openingBalance = 0;
         this.balance = openingBalance;
     }
 
