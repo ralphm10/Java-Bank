@@ -11,7 +11,7 @@ public class CurrentAccountTest {
 
     @Before
     public void setUp() {
-        underTest = new CurrentAccount(-500);
+        underTest = new CurrentAccount(500);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class CurrentAccountTest {
         Exception thrown = assertThrows(
                 Exception.class,
                 () ->
-                        underTest.withdraw(501));
+                        underTest.withdraw(500.01));
         assertEquals("Insufficient funds", thrown.getMessage());
     }
 

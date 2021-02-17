@@ -8,7 +8,7 @@ public class CurrentAccount implements Account {
 
     public CurrentAccount(double overdraftLimit){
         this.balance = 0;
-        this.overdraftLimit = overdraftLimit;
+        this.overdraftLimit = -overdraftLimit;
         this.statement = new Statement();
     }
 
