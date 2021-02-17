@@ -11,7 +11,7 @@ public class CurrentAccountTest {
 
     @Before
     public void setUp() {
-        underTest = new CurrentAccount();
+        underTest = new CurrentAccount(-500);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void throwExceptionForANegativeDeposit() {
+    public void throwsExceptionForANegativeDeposit() {
         Exception thrown = assertThrows(
                 Exception.class,
                 () ->
@@ -41,7 +41,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void throwExceptionForANegativeWithdrawal() {
+    public void throwsExceptionForANegativeWithdrawal() {
         Exception thrown = assertThrows(
                 Exception.class,
                 () ->
@@ -50,12 +50,21 @@ public class CurrentAccountTest {
     }
 
     @Test
+    public void throwsExceptionForExceedingOverdraft() {
+        Exception thrown = assertThrows(
+                Exception.class,
+                () ->
+                        underTest.withdraw(501));
+        assertEquals("Insufficient funds", thrown.getMessage());
+    }
+
+    @Test
     public void throwExceptionForAmountMoreThanTwoDecimals() {
         Exception thrown = assertThrows(
                 Exception.class,
                 () ->
                         underTest.deposit(10.599));
-        assertTrue(thrown.getMessage().equals("Invalid amount"));
+        assertEquals("Invalid amount", thrown.getMessage());
     }
 
     @Test

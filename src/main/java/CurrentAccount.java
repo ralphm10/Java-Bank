@@ -4,9 +4,11 @@ public class CurrentAccount implements Account {
 
     private double balance;
     private final Statement statement;
+    private double overdraftLimit;
 
-    public CurrentAccount(){
+    public CurrentAccount(double overdraftLimit){
         this.balance = 0;
+        this.overdraftLimit = overdraftLimit;
         this.statement = new Statement();
     }
 
@@ -25,6 +27,9 @@ public class CurrentAccount implements Account {
     @Override
     public void withdraw(double amount) throws Exception {
         checkAmount(amount);
+        if (this.balance - amount < this.overdraftLimit) {
+            throw new Exception("Insufficient funds");
+        }
         this.balance -= amount;
         this.statement.recordWithdrawal(amount, getBalance(), LocalDateTime.now());
     }
@@ -40,7 +45,7 @@ public class CurrentAccount implements Account {
     }
 
     public static void main(String[] args) throws Exception {
-        CurrentAccount ralph = new CurrentAccount();
+        CurrentAccount ralph = new CurrentAccount(0);
         ralph.deposit(999.49);
         ralph.withdraw(500.50);
         System.out.println(ralph.statement.printStatement());
