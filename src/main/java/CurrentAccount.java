@@ -16,19 +16,15 @@ public class CurrentAccount implements Account {
     }
 
     @Override
-    public void deposit(double amount) throws IllegalArgumentException {
-        if (invalidAmount(amount)) {
-            throw new IllegalArgumentException("Invalid amount");
-        }
+    public void deposit(double amount) throws Exception {
+        checkAmount(amount);
         this.balance += amount;
         this.statement.recordDeposit(amount, getBalance(), LocalDateTime.now());
     }
 
     @Override
-    public void withdraw(double amount) throws IllegalArgumentException {
-        if (invalidAmount(amount)) {
-            throw new IllegalArgumentException("Invalid amount");
-        }
+    public void withdraw(double amount) throws Exception {
+        checkAmount(amount);
         this.balance -= amount;
         this.statement.recordWithdrawal(amount, getBalance(), LocalDateTime.now());
     }
@@ -37,7 +33,13 @@ public class CurrentAccount implements Account {
         return amount <= 0 || amount * 1000 % 10 != 0;
     }
 
-    public static void main(String[] args) {
+    public void checkAmount(double amount) throws Exception {
+        if (invalidAmount(amount)) {
+            throw new Exception("Invalid amount");
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         CurrentAccount ralph = new CurrentAccount();
         ralph.deposit(999.49);
         ralph.withdraw(500.50);

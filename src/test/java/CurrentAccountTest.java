@@ -20,21 +20,21 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void depositIncreasesBalance() {
+    public void depositIncreasesBalance() throws Exception {
         underTest.deposit(1000);
         assertThat(underTest.getBalance()).isEqualTo(1000);
     }
 
     @Test
-    public void decimalDepositIsHandles() {
+    public void decimalDepositIsHandled() throws Exception {
         underTest.deposit(10.50);
         assertThat(underTest.getBalance()).isEqualTo(10.50);
     }
 
     @Test
     public void throwExceptionForANegativeDeposit() {
-        IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
+        Exception thrown = assertThrows(
+                Exception.class,
                 () ->
                         underTest.deposit(-1000));
         assertEquals("Invalid amount", thrown.getMessage());
@@ -42,8 +42,8 @@ public class CurrentAccountTest {
 
     @Test
     public void throwExceptionForANegativeWithdrawal() {
-        IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
+        Exception thrown = assertThrows(
+                Exception.class,
                 () ->
                         underTest.withdraw(-1000));
         assertEquals("Invalid amount", thrown.getMessage());
@@ -51,15 +51,15 @@ public class CurrentAccountTest {
 
     @Test
     public void throwExceptionForAmountMoreThanTwoDecimals() {
-        IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class,
+        Exception thrown = assertThrows(
+                Exception.class,
                 () ->
                         underTest.deposit(10.599));
         assertTrue(thrown.getMessage().equals("Invalid amount"));
     }
 
     @Test
-    public void withdrawalDecreasesBalance() {
+    public void withdrawalDecreasesBalance() throws Exception {
         underTest.deposit(1000);
         underTest.withdraw(500);
         assertEquals(500, underTest.getBalance(),0);
