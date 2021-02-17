@@ -55,7 +55,7 @@ public class CurrentAccountTest {
                 IllegalArgumentException.class,
                 () ->
                         underTest.deposit(10.599));
-        assertEquals("Invalid amount", thrown.getMessage());
+        assertTrue(thrown.getMessage().equals("Invalid amount"));
     }
 
     @Test

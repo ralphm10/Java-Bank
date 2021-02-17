@@ -1,6 +1,5 @@
 public interface Account {
 
-    Statement statement = new Statement();
     double getBalance();
 
     void deposit(double amount) throws IllegalArgumentException;
