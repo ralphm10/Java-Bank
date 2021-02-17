@@ -4,7 +4,7 @@ public class CurrentAccount implements Account {
 
     private double balance;
     private final Statement statement;
-    private double overdraftLimit;
+    private final double overdraftLimit;
 
     public CurrentAccount(double overdraftLimit){
         this.balance = 0;
