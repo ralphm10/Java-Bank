@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class CurrentAccount implements Account {
 
     private double balance;
@@ -19,7 +21,7 @@ public class CurrentAccount implements Account {
             throw new IllegalArgumentException("Invalid amount");
         }
         this.balance += amount;
-        statement.recordDeposit(amount,getBalance());
+        statement.recordDeposit(amount, getBalance(), LocalDateTime.now());
     }
 
     @Override
@@ -28,7 +30,7 @@ public class CurrentAccount implements Account {
             throw new IllegalArgumentException("Invalid amount");
         }
         this.balance -= amount;
-        statement.recordWithdrawal(amount,getBalance());
+        statement.recordWithdrawal(amount, getBalance(), LocalDateTime.now());
     }
 
     public boolean invalidAmount(double amount) {

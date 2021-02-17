@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 public class CurrentAccountTest {
 
     private CurrentAccount underTest;
@@ -38,7 +37,7 @@ public class CurrentAccountTest {
                 IllegalArgumentException.class,
                 () ->
                         underTest.deposit(-1000));
-        assertTrue(thrown.getMessage().equals("Invalid amount"));
+        assertEquals("Invalid amount", thrown.getMessage());
     }
 
     @Test
@@ -47,7 +46,7 @@ public class CurrentAccountTest {
                 IllegalArgumentException.class,
                 () ->
                         underTest.withdraw(-1000));
-        assertTrue(thrown.getMessage().equals("Invalid amount"));
+        assertEquals("Invalid amount", thrown.getMessage());
     }
 
     @Test
@@ -55,8 +54,8 @@ public class CurrentAccountTest {
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
                 () ->
-                        underTest.deposit(10.999));
-        assertTrue(thrown.getMessage().equals("Invalid amount"));
+                        underTest.deposit(10.599));
+        assertEquals("Invalid amount", thrown.getMessage());
     }
 
     @Test

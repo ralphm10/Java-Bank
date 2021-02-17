@@ -7,7 +7,6 @@ public class Statement {
 
     private final String HEADER = "date || credit || debit || balance";
     public ArrayList<String> transactions = new ArrayList<>();
-    public LocalDateTime now = LocalDateTime.now();
 
     public String printStatement(){
         if (getTransactions().size() == 0) {
@@ -16,21 +15,21 @@ public class Statement {
         return HEADER + "\n" + String.join("\n",getTransactions());
     }
 
-    public void recordDeposit(double amount, double balance) {
-        transactions.add(printDate(now) + " || " + formatAmount(amount) + " || || " + formatAmount(balance));
+    public void recordDeposit(double amount, double balance, LocalDateTime today) {
+        transactions.add(0, formatDate(today) + " || " + formatAmount(amount) + " || || " + formatAmount(balance));
     }
 
-    public void recordWithdrawal(double amount, double balance) {
-        transactions.add(printDate(now) + " || || " + formatAmount(amount) + " || " + formatAmount(balance));
+    public void recordWithdrawal(double amount, double balance, LocalDateTime today) {
+        transactions.add(formatDate(today) + " || || " + formatAmount(amount) + " || " + formatAmount(balance));
     }
 
     public ArrayList<String> getTransactions() {
         return transactions;
     }
 
-    public String printDate(LocalDateTime now){
+    public String formatDate(LocalDateTime date){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dtf.format(now);
+        return dtf.format(date);
     }
 
     public String formatAmount(double amount) {
